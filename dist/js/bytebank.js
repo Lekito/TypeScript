@@ -1,21 +1,32 @@
-var saldo = 3000;
-var elementoSaldo = document.querySelector(".saldo-valor .valor");
-if (elementoSaldo != null) {
-    elementoSaldo.textContent = saldo.toString();
+let saldo = 3000;
+alert("Testando o compilador do TS");
+const elementoSaldo = document.querySelector(".saldo-valor .valor");
+const elementoDataAcesso = document.querySelector(".block-saldo time");
+if (elementoDataAcesso != null) {
+    const dataAcesso = new Date();
+    elementoDataAcesso.textContent = dataAcesso.toLocaleDateString("bt-br", {
+        weekday: "long",
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric"
+    });
 }
-var elementoFormulario = document.querySelector(".block-nova-transacao form");
+if (elementoSaldo != null) {
+    elementoSaldo.textContent = saldo.toLocaleString("pt-br", { style: "currency", currency: "BRL" });
+}
+const elementoFormulario = document.querySelector(".block-nova-transacao form");
 elementoFormulario.addEventListener("submit", function (event) {
     event.preventDefault();
     if (!elementoFormulario.checkValidity()) {
         alert("Por favor, preencha todos os campos da transação!");
         return;
     }
-    var inputTipoTransacao = elementoFormulario.querySelector("#tipoTransacao");
-    var inputValor = elementoFormulario.querySelector("#valor");
-    var inputData = elementoFormulario.querySelector("#data");
-    var tipoTransacao = inputTipoTransacao.value;
-    var valor = inputValor.valueAsNumber;
-    var data = new Date(inputData.value);
+    const inputTipoTransacao = elementoFormulario.querySelector("#tipoTransacao");
+    const inputValor = elementoFormulario.querySelector("#valor");
+    const inputData = elementoFormulario.querySelector("#data");
+    let tipoTransacao = inputTipoTransacao.value;
+    let valor = inputValor.valueAsNumber;
+    let data = new Date(inputData.value);
     if (tipoTransacao == "Depósito") {
         saldo += valor;
     }
@@ -27,8 +38,8 @@ elementoFormulario.addEventListener("submit", function (event) {
         alert("Tipo de Transação é inválido!");
         return;
     }
-    elementoSaldo.textContent = saldo.toString();
-    var novaTransacao = {
+    elementoSaldo.textContent = saldo.toLocaleString("pt-br", { style: "currency", currency: "BRL" });
+    const novaTransacao = {
         tipoTransacao: tipoTransacao,
         valor: valor,
         data: data,

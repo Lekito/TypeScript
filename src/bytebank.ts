@@ -5,8 +5,20 @@ const elementoSaldo = document.querySelector(
   ".saldo-valor .valor"
 ) as HTMLElement;
 
+const elementoDataAcesso = document.querySelector(".block-saldo time") as HTMLElement;
+
+if (elementoDataAcesso != null) {
+  const dataAcesso: Date = new Date();
+  elementoDataAcesso.textContent = dataAcesso.toLocaleDateString("bt-br", {
+    weekday: "long",
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric"
+  });
+}
+
 if (elementoSaldo != null) {
-  elementoSaldo.textContent = saldo.toString();
+  elementoSaldo.textContent = saldo.toLocaleString("pt-br", { style: "currency", currency: "BRL" });
 }
 
 const elementoFormulario = document.querySelector(
@@ -46,7 +58,7 @@ elementoFormulario.addEventListener("submit", function (event) {
     return;
   }
 
-  elementoSaldo.textContent = saldo.toString();
+  elementoSaldo.textContent = saldo.toLocaleString("pt-br", { style: "currency", currency: "BRL" });
 
   const novaTransacao = {
     tipoTransacao: tipoTransacao,
